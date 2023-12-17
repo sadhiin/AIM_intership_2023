@@ -21,8 +21,9 @@ if __name__=="__main__":
 
         logging.info("Predicting the sentiment of the comments")
         df_comments['prediction'] = df_comments['message'].apply(lambda x: "Negative" if x == 0 else "Positive" , pipeline.predict)
-        logging.info("Saving the output to {}".format(parser.output))
-        df_comments.to_csv(parser.output, encoding='utf-8', index=False)
+        path_to_csv = os.path.join(parser.output, "comments_with_predictions.csv")
+        logging.info("Saving the output to {}".format(path_to_csv))
+        df_comments.to_csv(path_to_csv, encoding='utf-8', index=False)
 
     except Exception as e:
         logging.error(e)

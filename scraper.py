@@ -37,13 +37,13 @@ def request_until_succeed(url):
 
 def get_posts(page_id, access_token):
     """ Retrieve posts from the Facebook page """
-    url = f"https://graph.facebook.com/v12.0/{page_id}/posts?access_token={access_token}"
+    url = f"https://graph.facebook.com/v17.0/{page_id}/posts?access_token={access_token}"
     posts = request_until_succeed(url)
     return posts.get('data', [])
 
 def get_comments(post_id, access_token):
     """ Retrieve comments from a post """
-    url = f"https://graph.facebook.com/v12.0/{post_id}/comments?access_token={access_token}"
+    url = f"https://graph.facebook.com/v17.0/{post_id}/comments?access_token={access_token}"
     comments = request_until_succeed(url)
     return comments.get('data', [])
 
