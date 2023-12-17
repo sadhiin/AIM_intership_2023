@@ -56,16 +56,21 @@ def save_to_csv(filename, data):
             writer.writerow(item)
 
 if __name__ == '__main__':
-    access_token = get_access_token(app_id, app_secret)
-    posts = get_posts(page_id, access_token)
+    try:
 
-    all_comments = []
-    for post in posts:
-        post_id = post['id']
-        comments = get_comments(post_id, access_token)
-        for comment in comments:
-            all_comments.append([post_id, comment['id'], comment['message']])
+        access_token = get_access_token(app_id, app_secret)
+        posts = get_posts(page_id, access_token)
 
-    comment_file_name = "comments.csv"
-    save_to_csv(comment_file_name, all_comments)
-    print("All comments saved to {}".format(comment_file_name))
+        all_comments = []
+        for post in posts:
+            post_id = post['id']
+            comments = get_comments(post_id, access_token)
+            for comment in comments:
+                all_comments.append([post_id, comment['id'], comment['message']])
+
+        comment_file_name = "comments.csv"
+        save_to_csv(comment_file_name, all_comments)
+        print("All comments saved to {}".format(comment_file_name))
+
+    except Exception as e:
+        raise e
